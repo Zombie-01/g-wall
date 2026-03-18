@@ -30,17 +30,26 @@ export default function FramerMotion({
     });
   }, [images, lg, md]);
 
-  const letterTransforms = useMemo(() => {
-    return word
-      .split("")
-      .map(() =>
-        useTransform(
-          scrollYProgress,
-          [0, 1],
-          [0, Math.floor(Math.random() * -75) - 25],
-        ),
-      );
-  }, [scrollYProgress]);
+  const letterTransforms = [
+    useTransform(scrollYProgress, [0, 1], [0, Math.floor(Math.random() * -75) - 25]),
+    useTransform(scrollYProgress, [0, 1], [0, Math.floor(Math.random() * -75) - 25]),
+    useTransform(scrollYProgress, [0, 1], [0, Math.floor(Math.random() * -75) - 25]),
+    useTransform(scrollYProgress, [0, 1], [0, Math.floor(Math.random() * -75) - 25]),
+    useTransform(scrollYProgress, [0, 1], [0, Math.floor(Math.random() * -75) - 25]),
+    useTransform(scrollYProgress, [0, 1], [0, Math.floor(Math.random() * -75) - 25]),
+    useTransform(scrollYProgress, [0, 1], [0, Math.floor(Math.random() * -75) - 25]),
+    useTransform(scrollYProgress, [0, 1], [0, Math.floor(Math.random() * -75) - 25]),
+    useTransform(scrollYProgress, [0, 1], [0, Math.floor(Math.random() * -75) - 25]),
+    useTransform(scrollYProgress, [0, 1], [0, Math.floor(Math.random() * -75) - 25]),
+    useTransform(scrollYProgress, [0, 1], [0, Math.floor(Math.random() * -75) - 25]),
+    useTransform(scrollYProgress, [0, 1], [0, Math.floor(Math.random() * -75) - 25]),
+    useTransform(scrollYProgress, [0, 1], [0, Math.floor(Math.random() * -75) - 25]),
+    useTransform(scrollYProgress, [0, 1], [0, Math.floor(Math.random() * -75) - 25]),
+    useTransform(scrollYProgress, [0, 1], [0, Math.floor(Math.random() * -75) - 25]),
+    useTransform(scrollYProgress, [0, 1], [0, Math.floor(Math.random() * -75) - 25]),
+    useTransform(scrollYProgress, [0, 1], [0, Math.floor(Math.random() * -75) - 25]),
+    useTransform(scrollYProgress, [0, 1], [0, Math.floor(Math.random() * -75) - 25]),
+  ];
 
   const imageData = images.map((img, idx) => ({
     src: typeof img === "string" ? img : img.src,
