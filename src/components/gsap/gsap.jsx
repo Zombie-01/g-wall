@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import styles from "./gsap.module.scss";
 import Picture1 from "../../../public/images/1.jpeg";
 import Picture2 from "../../../public/images/2.jpeg";
@@ -18,6 +18,18 @@ export default function GSAP() {
   const sm = useTransform(scrollYProgress, [0, 1], [0, -50]);
   const md = useTransform(scrollYProgress, [0, 1], [0, -150]);
   const lg = useTransform(scrollYProgress, [0, 1], [0, -250]);
+
+  const letterTransforms = useMemo(() => {
+    return word
+      .split("")
+      .map(() =>
+        useTransform(
+          scrollYProgress,
+          [0, 1],
+          [0, Math.floor(Math.random() * -75) - 25],
+        ),
+      );
+  }, [scrollYProgress]);
 
   const images = [
     {
@@ -42,13 +54,10 @@ export default function GSAP() {
         <div className={styles.word}>
           <p>
             {word.split("").map((letter, i) => {
-              const y = useTransform(
-                scrollYProgress,
-                [0, 1],
-                [0, Math.floor(Math.random() * -75) - 25],
-              );
               return (
-                <motion.span style={{ top: y }} key={`l_${i}`}>
+                <motion.span
+                  style={{ top: letterTransforms[i] }}
+                  key={`l_${i}`}>
                   {letter}
                 </motion.span>
               );

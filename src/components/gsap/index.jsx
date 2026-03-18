@@ -30,6 +30,18 @@ export default function FramerMotion({
     });
   }, [images, lg, md]);
 
+  const letterTransforms = useMemo(() => {
+    return word
+      .split("")
+      .map(() =>
+        useTransform(
+          scrollYProgress,
+          [0, 1],
+          [0, Math.floor(Math.random() * -75) - 25],
+        ),
+      );
+  }, [scrollYProgress]);
+
   const imageData = images.map((img, idx) => ({
     src: typeof img === "string" ? img : img.src,
     y: imageTransforms[idx],
@@ -44,13 +56,10 @@ export default function FramerMotion({
         <div className={styles.word}>
           <p>
             {word.split("").map((letter, i) => {
-              const y = useTransform(
-                scrollYProgress,
-                [0, 1],
-                [0, Math.floor(Math.random() * -75) - 25],
-              );
               return (
-                <motion.span style={{ top: y }} key={`l_${i}`}>
+                <motion.span
+                  style={{ top: letterTransforms[i] }}
+                  key={`l_${i}`}>
                   {letter}
                 </motion.span>
               );
